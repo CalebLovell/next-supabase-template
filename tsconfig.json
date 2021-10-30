@@ -11,9 +11,6 @@
 			"@lib/*": [
 				"lib/*"
 			],
-			"@utils/*": [
-				"utils/*"
-			],
 		},
 		"allowJs": true,
 		"alwaysStrict": true,
