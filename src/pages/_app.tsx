@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }) {
 		<Auth.UserContextProvider supabaseClient={supabase}>
 			<QueryClientProvider client={queryClient}>
 				<Component {...pageProps} />
-				<ReactQueryDevtools initialIsOpen={false} />
+				<ReactQueryDevtools initialIsOpen={true} />
 			</QueryClientProvider>
 		</Auth.UserContextProvider>
 	);
