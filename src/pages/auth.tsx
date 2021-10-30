@@ -6,7 +6,7 @@ import { useAuthLogout, useSetAuthCookie } from '@hooks/auth';
 
 export default function AuthPage() {
 	const [authView, setAuthView] = useState(`sign_up`);
-	const { user, error, loading } = Auth.useUser();
+	const { user, error } = Auth.useUser();
 	const { mutate: setAuthCookie } = useSetAuthCookie();
 	const { mutate: authLogout } = useAuthLogout();
 
@@ -28,9 +28,7 @@ export default function AuthPage() {
 		<>
 			<Header />
 			<main style={{ maxWidth: `420px`, margin: `96px auto` }}>
-				{loading ? (
-					<p>Loading...</p>
-				) : error ? (
+				{error ? (
 					<p>Failed to fetch user!</p>
 				) : user ? (
 					<>

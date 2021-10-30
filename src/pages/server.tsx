@@ -2,6 +2,7 @@ import { supabase } from '../lib/supabaseClient';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { User } from '@supabase/gotrue-js';
 import { Header } from '@components/Header';
+import { UserInfo } from '@components/UserInfo';
 
 // Template for Server Side Auth
 export default function ServerPage({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -10,10 +11,7 @@ export default function ServerPage({ user }: InferGetServerSidePropsType<typeof 
 			<Header />
 			<main style={{ maxWidth: `600px`, margin: `96px auto` }}>
 				<h1>This user data was fetched from the Server Side</h1>
-				<p>{user?.id}</p>
-				<p>{user?.email}</p>
-				<p>{user?.app_metadata.provider}</p>
-				<p>{user?.last_sign_in_at}</p>
+				<UserInfo user={user} />
 			</main>
 		</>
 	);
