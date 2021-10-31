@@ -10,7 +10,16 @@ export default function ClientPage() {
 		<>
 			<Header />
 			<main style={{ maxWidth: `600px`, margin: `96px auto` }}>
-				{error ? <p>Failed to fetch user!</p> : user ? <UserInfo user={user} /> : <p>Not logged in</p>}
+				{error ? (
+					<p>Failed to fetch user!</p>
+				) : user ? (
+					<>
+						<h1>This user data was fetched from the Client Side</h1>
+						<UserInfo user={user} />{' '}
+					</>
+				) : (
+					<p>Not logged in</p>
+				)}
 			</main>
 		</>
 	);
