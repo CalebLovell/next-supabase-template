@@ -10,8 +10,17 @@ export default function ServerPage({ user }: InferGetServerSidePropsType<typeof 
 		<>
 			<Header />
 			<main style={{ maxWidth: `600px`, margin: `96px auto` }}>
-				<h1>This user data was fetched from the Server Side</h1>
-				<UserInfo user={user} />
+				{user ? (
+					<>
+						<h1>This user data was fetched from the Server Side</h1>
+						<UserInfo user={user} />
+					</>
+				) : (
+					<>
+						<h1>The user data was not available Server Side</h1>
+						<p>no cookie stored or it is expired</p>
+					</>
+				)}
 			</main>
 		</>
 	);
@@ -20,11 +29,9 @@ export default function ServerPage({ user }: InferGetServerSidePropsType<typeof 
 // In theory, I think this is supposed to work without explicitly passing in Props like this...
 // But if I didn't explicitly define the GetServerSideProps generic, it didn't infer the type,
 // so I'm explicitly defining it above ¯\_(ツ)_/¯
-export const getServerSideProps: GetServerSideProps<{ user: User }> = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps<{ user: User | null }> = async ({ req }) => {
 	const { user } = await supabase.auth.api.getUserByCookie(req);
-	// If there is no user, redirect to auth
-	if (!user) return { props: {}, redirect: { destination: '/auth', permanent: false } };
-	// If there is a user, return it
+	// If there is a user, return it, otherwise user will be null
 	return {
 		props: {
 			user,
