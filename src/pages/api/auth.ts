@@ -7,6 +7,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === 'POST') {
 		supabase.auth.api.setAuthCookie(req, res);
 	} else {
-		res.status(405).setHeader('Allow', 'POST');
+		res.setHeader('Allow', 'POST');
+		res.status(405).end('Method Not Allowed');
 	}
 }
